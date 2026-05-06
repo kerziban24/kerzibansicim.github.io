@@ -139,6 +139,43 @@
   .writing-meta { font-size: .78rem; color: var(--charcoal-light); }
 
   @media (max-width: 640px) { .hero { grid-template-columns: 1fr; } .hero-meta { display: none; } .stats { grid-template-columns: repeat(3, 1fr); } .stat-num { font-size: 1.4rem; } }
+  /* ── BOTTOM STRIP ── */
+.bottom-strip {
+  padding: 1.5rem 3rem;
+  border-top: 1px solid var(--cream-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.strip-note {
+  font-size: .72rem;
+  color: var(--charcoal-light);
+}
+
+.strip-socials {
+  display: flex;
+  gap: .6rem;
+}
+
+.social-pill {
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .4rem .9rem;
+  border: 1px solid var(--cream-dark);
+  border-radius: 99px;
+  color: var(--charcoal-mid);
+  text-decoration: none;
+  transition: border-color .15s, color .15s;
+}
+.social-pill:hover {
+  border-color: var(--crimson);
+  color: var(--crimson);
+}
 </style>
 </head>
 <body>
@@ -395,6 +432,15 @@
     <div class="writing-item"><div class="writing-dot"></div><div><div class="writing-title">Personality, Power, Policy: A Leadership Trait Analysis Application to Erdoğan's S-400 Crisis Leadership</div><div class="writing-meta">Undergraduate Thesis · ELTE · 2025</div></div></div>
     <div class="writing-item"><div class="writing-dot"></div><div><div class="writing-title">The Geopolitics of Repression: Xinjiang, China's Belt and Road, and International Silence</div><div class="writing-meta">Conference Paper · Students' Letters Conference, ELTE · 2024</div></div></div>
     <div class="writing-item"><div class="writing-dot"></div><div><div class="writing-title">Analytical Commentary — Security Governance, Foreign Policy & Narrative Construction</div><div class="writing-meta">ULTERIOR · Substack · Oct 2025 — Present · 300+ monthly readers</div></div></div>
+  </div>
+</div>
+  <!-- BOTTOM STRIP -->
+<div class="bottom-strip">
+  <span class="strip-note">Kerziban Sicim · International Relations · Budapest / Türkiye</span>
+  <div class="strip-socials">
+    <a href="https://linkedin.com/in/kerzibansicim" target="_blank" class="social-pill">LinkedIn</a>
+    <a href="https://kerzibansicim.substack.com" target="_blank" class="social-pill">Substack</a>
+    <a href="mailto:kerzibansicim24@gmail.com" class="social-pill">Email</a>
   </div>
 </div>
 
