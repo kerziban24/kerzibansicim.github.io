@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crimson: #6b1f1f;
+    --crimson-light: #8a2929;
+    --crimson-dim: rgba(107,31,31,0.08);
+    --crimson-mid: rgba(107,31,31,0.15);
+    --cream: #f4f1eb;
+    --cream-dark: #e8e4db;
+    --charcoal: #333232;
+    --charcoal-mid: #555454;
+    --charcoal-light: #888;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ─────────────────────────────────────────────────────────── */
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 6rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* subtle geometric background texture */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    border: 1px solid var(--cream-dark);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1px solid var(--cream-dark);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    margin-bottom: 1.4rem;
+    opacity: 0;
+    animation: fadeUp .6s ease forwards .1s;
+  }
+
+  .hero-name {
+    font-family: 'Lora', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1.05;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp .7s ease forwards .25s;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--crimson);
+  }
+
+  .hero-role {
+    font-family: 'Lora', serif;
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--charcoal-mid);
+    margin-bottom: 2.8rem;
+    opacity: 0;
+    animation: fadeUp .7s ease forwards .4s;
+    max-width: 520px;
+    line-height: 1.5;
+  }
+
+  .hero-role span {
+    display: inline-block;
+    color: var(--charcoal-mid);
+  }
+  .hero-role span::after {
+    content: ' ·';
+    color: var(--crimson);
+    margin: 0 .4rem 0 0;
+  }
+  .hero-role span:last-child::after { display: none; }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.2rem;
+    opacity: 0;
+    animation: fadeUp .7s ease forwards .55s;
+  }
+
+  .btn {
+    font-family: 'Montserrat', sans-serif;
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: .85rem 1.8rem;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all .2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+  }
+
+  .btn-primary {
+    background: var(--crimson);
+    color: var(--cream);
+    border: 1.5px solid var(--crimson);
+  }
+  .btn-primary:hover {
+    background: var(--crimson-light);
+    border-color: var(--crimson-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(107,31,31,.25);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--crimson);
+    border: 1.5px solid var(--crimson);
+  }
+  .btn-outline:hover {
+    background: var(--crimson-dim);
+    transform: translateY(-2px);
+  }
+
+  .btn-arrow {
+    font-size: .9rem;
+    transition: transform .2s;
+  }
+  .btn:hover .btn-arrow { transform: translateX(3px); }
+
+  .hero-updated {
+    font-size: .73rem;
+    color: var(--charcoal-light);
+    letter-spacing: .06em;
+    opacity: 0;
+    animation: fadeUp .6s ease forwards .7s;
+  }
+  .hero-updated span { color: var(--crimson); }
+
+  /* decorative crimson line on left */
+  .hero-line {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, transparent, var(--crimson) 30%, var(--crimson) 70%, transparent);
+    opacity: .4;
+  }
+
+  /* ── SELECTED WORK ────────────────────────────────────────────────── */
+  .section {
+    padding: 5rem 3rem;
+    position: relative;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--charcoal);
+  }
+
+  .section-link {
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    transition: gap .2s;
+  }
+  .section-link:hover { gap: .7rem; }
+
+  /* Project cards grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: white;
+    border: 1px solid var(--cream-dark);
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s;
+    position: relative;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--crimson);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease;
+  }
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(107,31,31,.1);
+    border-color: #d4c9c9;
+  }
+  .project-card:hover::before { transform: scaleX(1); }
+
+  .card-top {
+    height: 6px;
+    background: var(--crimson);
+  }
+  .card-top.dim { background: var(--cream-dark); }
+
+  .card-body { padding: 1.5rem 1.6rem; flex: 1; display: flex; flex-direction: column; }
+
+  .card-type {
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    margin-bottom: .6rem;
+  }
+  .card-type.placeholder-type { color: var(--charcoal-light); }
+
+  .card-title {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: .7rem;
+    line-height: 1.4;
+  }
+  .card-title.placeholder-title {
+    color: var(--charcoal-light);
+    font-style: italic;
+  }
+
+  .card-desc {
+    font-size: .8rem;
+    color: var(--charcoal-mid);
+    line-height: 1.65;
+    flex: 1;
+    margin-bottom: 1.2rem;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    margin-bottom: 1.2rem;
+  }
+  .card-tag {
+    font-size: .67rem;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 99px;
+    background: var(--crimson-dim);
+    color: var(--crimson);
+  }
+  .card-tag.grey {
+    background: var(--cream-dark);
+    color: var(--charcoal-light);
+  }
+
+  .card-cta {
+    font-size: .75rem;
+    font-weight: 600;
+    color: var(--crimson);
+    letter-spacing: .06em;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    transition: gap .2s;
+    text-transform: uppercase;
+  }
+  .project-card:hover .card-cta { gap: .7rem; }
+  .card-cta.placeholder-cta { color: var(--charcoal-light); }
+
+  /* Placeholder dashed card */
+  .project-card.placeholder {
+    border: 1.5px dashed var(--cream-dark);
+    background: transparent;
+  }
+  .project-card.placeholder:hover {
+    border-color: #c9c2b8;
+    box-shadow: none;
+    transform: none;
+  }
+  .project-card.placeholder::before { display: none; }
+
+  /* ── TICKER / CAROUSEL ────────────────────────────────────────────── */
+  .ticker-section {
+    padding: 0;
+    overflow: hidden;
+    background: var(--crimson);
+    position: relative;
+  }
+
+  .ticker-inner {
+    display: flex;
+    width: max-content;
+    animation: ticker 38s linear infinite;
+  }
+  .ticker-inner:hover { animation-play-state: paused; }
+
+  .ticker-track {
+    display: flex;
+    align-items: center;
+    padding: 1.1rem 0;
+  }
+
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    padding: 0 2.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .8rem;
+    font-weight: 500;
+    color: var(--cream);
+    letter-spacing: .04em;
+    gap: 1rem;
+  }
+
+  .ticker-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(244,241,235,.4);
+    flex-shrink: 0;
+  }
+
+  .ticker-label {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-size: .68rem;
+    color: rgba(244,241,235,.6);
+    margin-right: .3rem;
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── DIVIDER between sections ── */
+  .divider {
+    height: 1px;
+    background: var(--cream-dark);
+    margin: 0 3rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .hero { padding: 4rem 1.5rem 3rem; }
+    .section { padding: 3.5rem 1.5rem; }
+    .divider { margin: 0 1.5rem; }
+    .hero-btns { flex-direction: column; }
+    .btn { justify-content: center; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ──────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-line"></div>
+
+  <p class="hero-eyebrow">Portfolio · International Relations</p>
+
+  <h1 class="hero-name">
+    Kerziban<br><em>Sicim</em>
+  </h1>
+
+  <p class="hero-role">
+    <span>International Relations Expert</span>
+    <span>Aspiring Policy Analyst</span>
+    <span>Project Coordinator</span>
+  </p>
+
+  <div class="hero-btns">
+    <a href="https://kerzibansicim.substack.com" target="_blank" class="btn btn-primary">
+      Ulterior — Substack <span class="btn-arrow">↗</span>
+    </a>
+    <a href="[YOUR_CV_LINK]" download class="btn btn-outline">
+      Download CV <span class="btn-arrow">↓</span>
+    </a>
+  </div>
+
+  <p class="hero-updated">Last updated: <span>April 2025</span></p>
+</section>
+
+<!-- ── SELECTED WORK ───────────────────────────────────────────────────── -->
+<section class="section reveal" id="work">
+  <div class="section-header">
+    <h2 class="section-title">Selected Work</h2>
+    <a href="[YOUR_PROJECTS_PAGE_URL]" class="section-link">All projects →</a>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Card 1: Thesis -->
+    <a href="[YOUR_PROJECTS_PAGE_URL]#thesis" class="project-card">
+      <div class="card-top"></div>
+      <div class="card-body">
+        <div class="card-type">Undergraduate Thesis</div>
+        <div class="card-title">Personality, Power, Policy: A Leadership Trait Analysis of Erdoğan's S-400 Crisis Leadership</div>
+        <div class="card-desc">Applied Leadership Trait Analysis and qualitative discourse analysis to examine how Erdoğan navigated tensions between domestic imperatives, NATO alliance commitments, and institutional constraints during Turkey's S-400 acquisition crisis.</div>
+        <div class="card-tags">
+          <span class="card-tag">Turkish Foreign Policy</span>
+          <span class="card-tag">LTA</span>
+          <span class="card-tag">NATO</span>
+          <span class="card-tag">Security Studies</span>
+        </div>
+        <div class="card-cta">View project →</div>
+      </div>
+    </a>
+
+    <!-- Card 2: Placeholder -->
+    <a href="[YOUR_PROJECTS_PAGE_URL]" class="project-card placeholder">
+      <div class="card-top dim"></div>
+      <div class="card-body">
+        <div class="card-type placeholder-type">Coming Soon</div>
+        <div class="card-title placeholder-title">Next project — in progress</div>
+        <div class="card-desc" style="color:var(--charcoal-light);">A new piece of research or policy analysis. Check back soon, or follow Ulterior on Substack for updates as work develops.</div>
+        <div class="card-tags">
+          <span class="card-tag grey">TBA</span>
+        </div>
+        <div class="card-cta placeholder-cta">View projects page →</div>
+      </div>
+    </a>
+
+    <!-- Card 3: Placeholder -->
+    <a href="[YOUR_PROJECTS_PAGE_URL]" class="project-card placeholder">
+      <div class="card-top dim"></div>
+      <div class="card-body">
+        <div class="card-type placeholder-type">Coming Soon</div>
+        <div class="card-title placeholder-title">Next project — in progress</div>
+        <div class="card-desc" style="color:var(--charcoal-light);">Policy brief, stakeholder analysis, or independent research. Updated as new work is completed and added to the portfolio.</div>
+        <div class="card-tags">
+          <span class="card-tag grey">TBA</span>
+        </div>
+        <div class="card-cta placeholder-cta">View projects page →</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ── NOW SECTION ─────────────────────────────────────────────────────
+     PASTE THIS BLOCK between the closing </section> of SELECTED WORK
+     and the opening <div class="ticker-section"> of the TICKER.
+     It will sit: HERO → SELECTED WORK → NOW → TICKER
+──────────────────────────────────────────────────────────────────── -->
+
+<!-- NOW -->
+<section class="now-section">
+  <div class="now-inner">
+
+    <div class="now-header">
+      <div class="now-eyebrow">
+        <span class="now-dot"></span>
+        Now
+      </div>
+      <p class="now-date">Updated April 2025</p>
+    </div>
+
+    <div class="now-grid">
+
+      <div class="now-card">
+        <div class="now-card-icon">⚙</div>
+        <div class="now-card-label">Working on</div>
+        <div class="now-card-title">Building this portfolio</div>
+        <div class="now-card-body">Documenting my research, writing, and project work into a cohesive public portfolio. Also developing new policy analysis pieces for Ulterior.</div>
+      </div>
+
+      <div class="now-card">
+        <div class="now-card-icon">✦</div>
+        <div class="now-card-label">Focusing on</div>
+        <div class="now-card-title">AI Fellowship at YZTA</div>
+        <div class="now-card-body">Applying AI-assisted research workflows to political and economic analysis as part of the national fellowship supported by Google Türkiye and the Ministry of Industry and Technology.</div>
+      </div>
+
+      <div class="now-card">
+        <div class="now-card-icon">📖</div>
+        <div class="now-card-label">Reading</div>
+        <div class="now-card-title">[Current book title]</div>
+        <div class="now-card-body">Replace with what you are actually reading right now — fiction, non-fiction, academic. Keep it honest and update it regularly.</div>
+      </div>
+
+      <div class="now-card">
+        <div class="now-card-icon">◎</div>
+        <div class="now-card-label">Open to</div>
+        <div class="now-card-title">Policy research & analyst roles</div>
+        <div class="now-card-body">Actively looking for positions in policy research, think tanks, NGOs, or international organisations. Based in Türkiye, open to remote and international roles.</div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ADD THIS CSS inside the <style> block of your home page HTML,
+     anywhere before the closing </style> tag -->
+<style>
+  /* ── NOW SECTION ── */
+  .now-section {
+    padding: 4rem 3rem;
+    border-top: 1px solid var(--cream-dark);
+    border-bottom: 1px solid var(--cream-dark);
+    background: var(--white);
+  }
+
+  .now-inner { max-width: 900px; }
+
+  .now-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  .now-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-family: 'Lora', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--charcoal);
+  }
+
+  .now-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--crimson);
+    animation: nowpulse 2.2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes nowpulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(107,31,31,.35); }
+    50%       { box-shadow: 0 0 0 6px rgba(107,31,31,0); }
+  }
+
+  .now-date {
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--charcoal-light);
+  }
+
+  .now-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--cream-dark);
+    border: 1px solid var(--cream-dark);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .now-card {
+    background: var(--cream);
+    padding: 1.5rem 1.4rem;
+    transition: background .18s;
+  }
+  .now-card:hover { background: #fdfcf9; }
+
+  .now-card-icon {
+    font-size: 1.2rem;
+    margin-bottom: .7rem;
+    line-height: 1;
+  }
+
+  .now-card-label {
+    font-size: .6rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    margin-bottom: .35rem;
+  }
+
+  .now-card-title {
+    font-family: 'Lora', serif;
+    font-size: .92rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    line-height: 1.3;
+    margin-bottom: .5rem;
+  }
+
+  .now-card-body {
+    font-size: .75rem;
+    color: var(--charcoal-mid);
+    line-height: 1.65;
+  }
+
+  @media (max-width: 700px) {
+    .now-section { padding: 2.5rem 1.5rem; }
+    .now-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 420px) {
+    .now-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<!-- ── TICKER ─────────────────────────────────────────────────────────── -->
+<div class="ticker-section">
+  <div class="ticker-inner">
+    <!-- track repeated twice for seamless loop -->
+    <div class="ticker-track">
+      <div class="ticker-item"><span class="ticker-label">GPA</span> 4.73 / 5.00 at ELTE Budapest <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Fellowship</span> Top 4.7% of 31,000+ applicants — AI & Technology, Google Türkiye <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Writing</span> 300+ monthly readers on Ulterior (Substack) <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Scholarship</span> Stipendium Hungaricum — full merit-based state award <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Events</span> 300+ participants across EU-funded Climathons & Ideathons <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Research</span> Thesis on Erdoğan's S-400 crisis leadership — LTA methodology <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Languages</span> Turkish · English C2 · Hungarian B1 · German B1 <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Conference</span> Presented at Students' Letters Conference, ELTE 2024 <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Award</span> GiLE Foundation Top Contributor 2024 <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Focus</span> Turkish Foreign Policy · Transatlantic Security · Geopolitical Risk <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Hobbies</span> Reading Romantasy · Random Design · Puzzling · Chess <div class="ticker-dot"></div></div>
+    </div>
+    <!-- duplicate for seamless infinite scroll -->
+    <div class="ticker-track" aria-hidden="true">
+      <div class="ticker-item"><span class="ticker-label">GPA</span> 4.73 / 5.00 at ELTE Budapest <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Fellowship</span> Top 4.7% of 31,000+ applicants — AI & Technology, Google Türkiye <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Writing</span> 300+ monthly readers on Ulterior (Substack) <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Scholarship</span> Stipendium Hungaricum — full merit-based state award <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Events</span> 300+ participants across EU-funded Climathons & Ideathons <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Research</span> Thesis on Erdoğan's S-400 crisis leadership — LTA methodology <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Languages</span> Turkish · English C2 · Hungarian B1 · German B1 <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Conference</span> Presented at Students' Letters Conference, ELTE 2024 <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Award</span> GiLE Foundation Top Contributor 2024 <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Focus</span> Turkish Foreign Policy · Transatlantic Security · Geopolitical Risk <div class="ticker-dot"></div></div>
+      <div class="ticker-item"><span class="ticker-label">Hobbies</span> Reading Romantasy · Random Design · Puzzling · Chess <div class="ticker-dot"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+<script>
+  // Auto-resize for Google Sites embed
+  function sendHeight() {
+    const height = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'resize', height: height }, '*');
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+
+  // Also send height after animations settle
+  setTimeout(sendHeight, 800);
+  setTimeout(sendHeight, 1500);
+</script>
+</body>
+</html>
