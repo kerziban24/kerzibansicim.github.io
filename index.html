@@ -430,9 +430,124 @@
     .hero-btns { flex-direction: column; }
     .btn { justify-content: center; text-align: center; }
   }
+  /* ── NAVIGATION ── */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: var(--cream);
+  border-bottom: 1px solid var(--cream-dark);
+  padding: 0 3rem;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: 'Lora', serif;
+  font-size: .92rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  text-decoration: none;
+  letter-spacing: .01em;
+}
+.nav-logo:hover { color: var(--crimson); }
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--charcoal-mid);
+  text-decoration: none;
+  transition: color .15s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0; right: 0;
+  height: 1.5px;
+  background: var(--crimson);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .2s;
+}
+.nav-links a:hover { color: var(--crimson); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--crimson); }
+.nav-links a.active::after { transform: scaleX(1); }
+
+/* Burger for mobile */
+.nav-burger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--charcoal);
+  padding: .3rem;
+}
+
+/* Mobile dropdown */
+.nav-mobile {
+  display: none;
+  flex-direction: column;
+  background: var(--cream);
+  border-bottom: 1px solid var(--cream-dark);
+  padding: 1rem 2rem;
+  gap: 1rem;
+  position: sticky;
+  top: 56px;
+  z-index: 998;
+}
+.nav-mobile.open { display: flex; }
+.nav-mobile a {
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--charcoal-mid);
+  text-decoration: none;
+}
+.nav-mobile a:hover { color: var(--crimson); }
+
+@media (max-width: 680px) {
+  .site-nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .nav-burger { display: block; }
+}
 </style>
 </head>
 <body>
+
+<!-- NAVIGATION -->
+<nav class="site-nav">
+  <a href="/index.html" class="nav-logo">Kerziban Sicim</a>
+  <div class="nav-links">
+    <a href="/index.html">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/projects.html">Projects</a>
+    <a href="/writing.html">Ulterior</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <button class="nav-burger" onclick="toggleNav()">☰</button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="/index.html" onclick="toggleNav()">Home</a>
+  <a href="/about.html" onclick="toggleNav()">About</a>
+  <a href="/projects.html" onclick="toggleNav()">Projects</a>
+  <a href="/writing.html" onclick="toggleNav()">Ulterior</a>
+  <a href="/contact.html" onclick="toggleNav()">Contact</a>
+</div>
 
 <!-- ── HERO ──────────────────────────────────────────────────────────── -->
 <section class="hero">
@@ -736,6 +851,21 @@
   // Also send height after animations settle
   setTimeout(sendHeight, 800);
   setTimeout(sendHeight, 1500);
+</script>
+
+  <script>
+  function toggleNav() {
+    document.getElementById('navMobile').classList.toggle('open');
+  }
+
+  // Highlight active page in nav
+  const path = window.location.pathname;
+  document.querySelectorAll('.nav-links a, .nav-mobile a').forEach(link => {
+    if (link.getAttribute('href') === path ||
+        (path === '/' && link.getAttribute('href') === '/index.html')) {
+      link.classList.add('active');
+    }
+  });
 </script>
 </body>
 </html>
