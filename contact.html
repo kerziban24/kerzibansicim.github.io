@@ -745,6 +745,19 @@
     });
   });
 </script>
+<script>
+  function toggleNav() {
+    document.getElementById('navMobile').classList.toggle('open');
+  }
 
+  // Highlight active page in nav
+  const path = window.location.pathname;
+  document.querySelectorAll('.nav-links a, .nav-mobile a').forEach(link => {
+    if (link.getAttribute('href') === path ||
+        (path === '/' && link.getAttribute('href') === '/index.html')) {
+      link.classList.add('active');
+    }
+  });
+</script>
 </body>
 </html>
