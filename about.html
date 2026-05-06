@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About — Portfolio</title>
+<title>About — Kerziban Sicim</title>
+<meta name="description" content="About Kerziban Sicim — IR graduate, policy researcher, EU project coordinator, and writer.">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -15,30 +16,38 @@
     --charcoal: #333232;
     --charcoal-mid: #555454;
     --charcoal-light: #888;
+    --white: #ffffff;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--cream); color: var(--charcoal); font-family: 'Montserrat', sans-serif; font-weight: 400; line-height: 1.7; -webkit-font-smoothing: antialiased; }
 
-  body {
-    background: var(--cream);
-    color: var(--charcoal);
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-  }
+  /* ── NAV ── */
+  .site-nav { position: sticky; top: 0; z-index: 999; background: var(--cream); border-bottom: 1px solid var(--cream-dark); padding: 0 3rem; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-family: 'Lora', serif; font-size: .92rem; font-weight: 700; color: var(--charcoal); text-decoration: none; letter-spacing: .01em; }
+  .nav-logo:hover { color: var(--crimson); }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a { font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--charcoal-mid); text-decoration: none; transition: color .15s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1.5px; background: var(--crimson); transform: scaleX(0); transform-origin: left; transition: transform .2s; }
+  .nav-links a:hover { color: var(--crimson); }
+  .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+  .nav-links a.active { color: var(--crimson); }
+  .nav-burger { display: none; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--charcoal); padding: .3rem; }
+  .nav-mobile { display: none; flex-direction: column; background: var(--cream); border-bottom: 1px solid var(--cream-dark); padding: 1rem 2rem; gap: 1rem; position: sticky; top: 56px; z-index: 998; }
+  .nav-mobile.open { display: flex; }
+  .nav-mobile a { font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--charcoal-mid); text-decoration: none; }
+  .nav-mobile a:hover { color: var(--crimson); }
+  @media (max-width: 680px) { .site-nav { padding: 0 1.5rem; } .nav-links { display: none; } .nav-burger { display: block; } }
 
+  /* ── PAGE ── */
   .page { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 5rem; }
 
   /* ── HERO ── */
   .hero { display: grid; grid-template-columns: 1fr auto; gap: 2.5rem; align-items: start; margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--cream-dark); }
-  .hero-text {}
-  .hero-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--crimson); margin-bottom: 1rem; }
+  .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--crimson); margin-bottom: 1rem; }
   .hero-name { font-family: 'Lora', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; color: var(--charcoal); line-height: 1.15; margin-bottom: .6rem; }
   .hero-title { font-family: 'Lora', serif; font-size: 1.05rem; font-weight: 400; font-style: italic; color: var(--crimson); margin-bottom: 1.4rem; }
   .hero-bio { font-size: .88rem; color: var(--charcoal-mid); max-width: 540px; line-height: 1.8; }
   .hero-bio + .hero-bio { margin-top: .8rem; }
-
   .hero-meta { display: flex; flex-direction: column; gap: .75rem; min-width: 180px; padding-top: .3rem; }
   .meta-item { display: flex; align-items: flex-start; gap: .6rem; font-size: .8rem; color: var(--charcoal-mid); }
   .meta-icon { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; opacity: .6; }
@@ -59,47 +68,23 @@
   /* ── TIMELINE ── */
   .timeline { margin-bottom: 4rem; }
   .tl-item { position: relative; padding-left: 2rem; margin-bottom: .5rem; }
-  .tl-item::before { content: ''; position: absolute; left: 0; top: 1.6rem; width: 8px; height: 8px; border-radius: 50%; background: var(--cream-dark); border: 2px solid var(--crimson-light); transition: background .25s; }
+  .tl-item::before { content: ''; position: absolute; left: 0; top: 1.6rem; width: 8px; height: 8px; border-radius: 50%; background: var(--cream-dark); border: 2px solid var(--crimson-light); }
   .tl-item::after { content: ''; position: absolute; left: 3px; top: 2.35rem; width: 1px; bottom: -1.7rem; background: var(--cream-dark); }
   .tl-item:last-child::after { display: none; }
-
-  /* Card */
-  .tl-card {
-    background: white;
-    border: 1px solid var(--cream-dark);
-    border-radius: 6px;
-    padding: 1.2rem 1.4rem;
-    cursor: default;
-    transition: border-color .2s, box-shadow .2s, transform .2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .tl-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--crimson);
-    transform: scaleY(0);
-    transform-origin: bottom;
-    transition: transform .25s ease;
-  }
+  .tl-card { background: white; border: 1px solid var(--cream-dark); border-radius: 6px; padding: 1.2rem 1.4rem; cursor: default; transition: border-color .2s, box-shadow .2s, transform .2s; position: relative; overflow: hidden; }
+  .tl-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--crimson); transform: scaleY(0); transform-origin: bottom; transition: transform .25s ease; }
   .tl-card:hover { border-color: #d4c9c9; box-shadow: 0 4px 18px rgba(107,31,31,.09); transform: translateX(3px); }
   .tl-card:hover::before { transform: scaleY(1); }
   .tl-card:hover .tl-expand { max-height: 500px; opacity: 1; margin-top: .85rem; }
   .tl-card:hover .tl-hover-hint { opacity: 0; }
-
   .tl-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
   .tl-role { font-family: 'Lora', serif; font-size: .98rem; font-weight: 600; color: var(--charcoal); margin-bottom: .15rem; }
   .tl-org { font-size: .82rem; font-weight: 600; color: var(--crimson); text-transform: uppercase; letter-spacing: .06em; }
   .tl-date { font-size: .75rem; color: var(--charcoal-light); white-space: nowrap; margin-top: .15rem; font-weight: 500; }
   .tl-location { font-size: .75rem; color: var(--charcoal-light); margin-top: .05rem; }
-
   .tl-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .6rem; }
   .tag { font-size: .68rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; padding: 2px 8px; border-radius: 99px; background: var(--crimson-dim); color: var(--crimson); }
-
   .tl-hover-hint { font-size: .72rem; color: var(--charcoal-light); margin-top: .5rem; transition: opacity .2s; font-style: italic; }
-
   .tl-expand { max-height: 0; opacity: 0; overflow: hidden; transition: max-height .35s ease, opacity .25s ease, margin .25s ease; }
   .tl-expand ul { list-style: none; padding: 0; border-top: 1px solid var(--cream-dark); padding-top: .75rem; }
   .tl-expand ul li { font-size: .82rem; color: var(--charcoal-mid); padding: .3rem 0 .3rem 1rem; position: relative; line-height: 1.6; }
@@ -116,7 +101,6 @@
   .skill-name span { color: var(--charcoal-light); font-weight: 400; }
   .skill-bar-bg { height: 4px; background: var(--cream-dark); border-radius: 99px; overflow: hidden; }
   .skill-bar-fill { height: 100%; background: var(--crimson); border-radius: 99px; width: 0; transition: width 1s ease; }
-
   .skill-pills { display: flex; flex-wrap: wrap; gap: .4rem; }
   .skill-pill { font-size: .73rem; font-weight: 500; padding: 4px 10px; border-radius: 99px; background: var(--cream-dark); color: var(--charcoal-mid); }
 
@@ -154,132 +138,31 @@
   .writing-title { font-family: 'Lora', serif; font-size: .92rem; font-weight: 600; color: var(--charcoal); margin-bottom: .15rem; }
   .writing-meta { font-size: .78rem; color: var(--charcoal-light); }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 640px) {
-    .hero { grid-template-columns: 1fr; }
-    .hero-meta { display: none; }
-    .stats { grid-template-columns: repeat(3, 1fr); }
-    .stat-num { font-size: 1.4rem; }
-
-  /* ── NAVIGATION ── */
-.site-nav {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  background: var(--cream);
-  border-bottom: 1px solid var(--cream-dark);
-  padding: 0 3rem;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nav-logo {
-  font-family: 'Lora', serif;
-  font-size: .92rem;
-  font-weight: 700;
-  color: var(--charcoal);
-  text-decoration: none;
-  letter-spacing: .01em;
-}
-.nav-logo:hover { color: var(--crimson); }
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.nav-links a {
-  font-size: .72rem;
-  font-weight: 600;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--charcoal-mid);
-  text-decoration: none;
-  transition: color .15s;
-  position: relative;
-}
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0; right: 0;
-  height: 1.5px;
-  background: var(--crimson);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .2s;
-}
-.nav-links a:hover { color: var(--crimson); }
-.nav-links a:hover::after { transform: scaleX(1); }
-.nav-links a.active { color: var(--crimson); }
-.nav-links a.active::after { transform: scaleX(1); }
-
-/* Burger for mobile */
-.nav-burger {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: var(--charcoal);
-  padding: .3rem;
-}
-
-/* Mobile dropdown */
-.nav-mobile {
-  display: none;
-  flex-direction: column;
-  background: var(--cream);
-  border-bottom: 1px solid var(--cream-dark);
-  padding: 1rem 2rem;
-  gap: 1rem;
-  position: sticky;
-  top: 56px;
-  z-index: 998;
-}
-.nav-mobile.open { display: flex; }
-.nav-mobile a {
-  font-size: .78rem;
-  font-weight: 600;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--charcoal-mid);
-  text-decoration: none;
-}
-.nav-mobile a:hover { color: var(--crimson); }
-
-@media (max-width: 680px) {
-  .site-nav { padding: 0 1.5rem; }
-  .nav-links { display: none; }
-  .nav-burger { display: block; }
-  }
+  @media (max-width: 640px) { .hero { grid-template-columns: 1fr; } .hero-meta { display: none; } .stats { grid-template-columns: repeat(3, 1fr); } .stat-num { font-size: 1.4rem; } }
 </style>
 </head>
 <body>
-  <!-- NAVIGATION -->
+
 <nav class="site-nav">
-  <a href="/index.html" class="nav-logo">Kerziban Sicim</a>
+  <a href="index.html" class="nav-logo">Kerziban Sicim</a>
   <div class="nav-links">
-    <a href="/index.html">Home</a>
-    <a href="/about.html">About</a>
-    <a href="/projects.html">Projects</a>
-    <a href="/writing.html">Ulterior</a>
-    <a href="/contact.html">Contact</a>
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="writing.html">Ulterior</a>
+    <a href="contact.html">Contact</a>
   </div>
   <button class="nav-burger" onclick="toggleNav()">☰</button>
 </nav>
 <div class="nav-mobile" id="navMobile">
-  <a href="/index.html" onclick="toggleNav()">Home</a>
-  <a href="/about.html" onclick="toggleNav()">About</a>
-  <a href="/projects.html" onclick="toggleNav()">Projects</a>
-  <a href="/writing.html" onclick="toggleNav()">Ulterior</a>
-  <a href="/contact.html" onclick="toggleNav()">Contact</a>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="projects.html">Projects</a>
+  <a href="writing.html">Ulterior</a>
+  <a href="contact.html">Contact</a>
 </div>
-<div class="page">
 
+<div class="page">
   <!-- HERO -->
   <div class="hero">
     <div class="hero-text">
@@ -318,22 +201,16 @@
 
   <!-- EXPERIENCE -->
   <div class="section-label"><h2>Experience</h2></div>
-  <div class="timeline" id="timeline">
-
+  <div class="timeline">
     <div class="tl-item">
       <div class="tl-card">
         <div class="tl-header">
           <div>
             <div class="tl-role">Fellow — AI & Technology</div>
             <div class="tl-org">Yapay Zeka ve Teknoloji Akademisi</div>
-            <div class="tl-tags">
-              <span class="tag">AI Research</span><span class="tag">Technology Policy</span><span class="tag">Data Analytics</span>
-            </div>
+            <div class="tl-tags"><span class="tag">AI Research</span><span class="tag">Technology Policy</span><span class="tag">Data Analytics</span></div>
           </div>
-          <div style="text-align:right;">
-            <div class="tl-date">Dec 2025 — Present</div>
-            <div class="tl-location">Türkiye</div>
-          </div>
+          <div style="text-align:right;"><div class="tl-date">Dec 2025 — Present</div><div class="tl-location">Türkiye</div></div>
         </div>
         <div class="tl-hover-hint">Hover to expand ↓</div>
         <div class="tl-expand">
@@ -346,20 +223,15 @@
         </div>
       </div>
     </div>
-
     <div class="tl-item">
       <div class="tl-card">
         <div class="tl-header">
           <div>
             <div class="tl-role">Independent Analyst & Writer</div>
             <div class="tl-org">ULTERIOR</div>
-            <div class="tl-tags">
-              <span class="tag">Foreign Policy</span><span class="tag">Security</span><span class="tag">Substack</span>
-            </div>
+            <div class="tl-tags"><span class="tag">Foreign Policy</span><span class="tag">Security</span><span class="tag">Substack</span></div>
           </div>
-          <div style="text-align:right;">
-            <div class="tl-date">Oct 2025 — Present</div>
-          </div>
+          <div style="text-align:right;"><div class="tl-date">Oct 2025 — Present</div></div>
         </div>
         <div class="tl-hover-hint">Hover to expand ↓</div>
         <div class="tl-expand">
@@ -371,48 +243,36 @@
         </div>
       </div>
     </div>
-
     <div class="tl-item">
       <div class="tl-card">
         <div class="tl-header">
           <div>
             <div class="tl-role">Project & Event Coordinator</div>
             <div class="tl-org">GiLE Foundation</div>
-            <div class="tl-tags">
-              <span class="tag">EU Projects</span><span class="tag">Civic Engagement</span><span class="tag">SDGs</span>
-            </div>
+            <div class="tl-tags"><span class="tag">EU Projects</span><span class="tag">Civic Engagement</span><span class="tag">SDGs</span></div>
           </div>
-          <div style="text-align:right;">
-            <div class="tl-date">Apr 2024 — Present</div>
-            <div class="tl-location">Budapest, Hungary</div>
-          </div>
+          <div style="text-align:right;"><div class="tl-date">Apr 2024 — Present</div><div class="tl-location">Budapest, Hungary</div></div>
         </div>
         <div class="tl-hover-hint">Hover to expand ↓</div>
         <div class="tl-expand">
           <ul>
             <li>Manage implementation of EU-funded civic engagement and sustainability projects (CLYMACT) aligned with EU governance frameworks and SDG targets, serving as Hungary Country Coordinator.</li>
-            <li>Lead project lifecycles for 5+ large-scale civic engagement events, including multiple Climathons (climate governance hackathons in partnership with Budapest municipalities) and Ideathons, reaching 300+ participants.</li>
+            <li>Lead project lifecycles for 5+ large-scale civic engagement events, including multiple Climathons and Ideathons, reaching 300+ participants.</li>
             <li>Oversight of multi-thousand Euro budgets and compliance with EU project contracts.</li>
           </ul>
           <div class="highlight-box">GiLE Foundation's top contributor 2024 — outstanding project coordination</div>
         </div>
       </div>
     </div>
-
     <div class="tl-item">
       <div class="tl-card">
         <div class="tl-header">
           <div>
             <div class="tl-role">Vice President — HR & Communications</div>
             <div class="tl-org">International Diplomatic Student Association (IDSA)</div>
-            <div class="tl-tags">
-              <span class="tag">Governance</span><span class="tag">HR</span><span class="tag">Diplomacy</span>
-            </div>
+            <div class="tl-tags"><span class="tag">Governance</span><span class="tag">HR</span><span class="tag">Diplomacy</span></div>
           </div>
-          <div style="text-align:right;">
-            <div class="tl-date">Jun 2024 — Jul 2025</div>
-            <div class="tl-location">Budapest, Hungary</div>
-          </div>
+          <div style="text-align:right;"><div class="tl-date">Jun 2024 — Jul 2025</div><div class="tl-location">Budapest, Hungary</div></div>
         </div>
         <div class="tl-hover-hint">Hover to expand ↓</div>
         <div class="tl-expand">
@@ -423,21 +283,15 @@
         </div>
       </div>
     </div>
-
     <div class="tl-item">
       <div class="tl-card">
         <div class="tl-header">
           <div>
             <div class="tl-role">Academic Support & Student Leadership</div>
             <div class="tl-org">Eötvös Loránd University (ELTE)</div>
-            <div class="tl-tags">
-              <span class="tag">Mentoring</span><span class="tag">Marketing</span><span class="tag">Administration</span>
-            </div>
+            <div class="tl-tags"><span class="tag">Mentoring</span><span class="tag">Marketing</span><span class="tag">Administration</span></div>
           </div>
-          <div style="text-align:right;">
-            <div class="tl-date">Sep 2023 — Jul 2025</div>
-            <div class="tl-location">Budapest, Hungary</div>
-          </div>
+          <div style="text-align:right;"><div class="tl-date">Sep 2023 — Jul 2025</div><div class="tl-location">Budapest, Hungary</div></div>
         </div>
         <div class="tl-hover-hint">Hover to expand ↓</div>
         <div class="tl-expand">
@@ -449,8 +303,7 @@
         </div>
       </div>
     </div>
-
-  </div><!-- /timeline -->
+  </div>
 
   <!-- EDUCATION -->
   <div class="section-label"><h2>Education</h2></div>
@@ -461,27 +314,19 @@
     <span class="edu-gpa">GPA: 4.73 / 5.00 &nbsp;(3.9 / 4.0)</span>
     <div class="edu-thesis">
       <strong>Thesis:</strong> Personality, Power, Policy: A Leadership Trait Analysis Application to Erdoğan's S-400 Crisis Leadership<br>
-      <span style="margin-top:.4rem;display:block;">Applied Leadership Trait Analysis (LTA) and qualitative discourse analysis to examine how leadership navigates tensions between domestic security imperatives, alliance commitments, and institutional constraints during crisis. Analysed the strategic and political implications of Turkey's S-400 acquisition for transatlantic security and EU-Turkey relations.</span>
+      <span style="margin-top:.4rem;display:block;">Applied Leadership Trait Analysis (LTA) and qualitative discourse analysis to examine how leadership navigates tensions between domestic security imperatives, alliance commitments, and institutional constraints during crisis.</span>
     </div>
-<div class="edu-coursework" style="margin-bottom:.9rem;">
+    <div class="edu-coursework" style="margin-bottom:.9rem;margin-top:.9rem;">
       <div class="edu-coursework-label">Conference Paper</div>
       <div class="edu-thesis">
         <strong>The Geopolitics of Repression: Xinjiang, China's Belt and Road, and International Silence</strong><br>
-        <span style="margin-top:.4rem;display:block;">Presented at the Students' Letters Conference, Eötvös Loránd University (2024). Analysed the intersection of economic statecraft and geopolitical accountability, examining how economic leverage created by the BRI shapes state responses to human rights violations and the political constraints on multilateral action.</span>
+        <span style="margin-top:.4rem;display:block;">Presented at the Students' Letters Conference, Eötvös Loránd University (2024). Analysed how economic leverage created by the BRI shapes state responses to human rights violations.</span>
       </div>
     </div>
     <div class="edu-coursework">
       <div class="edu-coursework-label">Relevant Coursework</div>
       <div class="skill-pills">
-        <span class="skill-pill">International Law</span>
-        <span class="skill-pill">EU Law</span>
-        <span class="skill-pill">Human Rights</span>
-        <span class="skill-pill">Migration</span>
-        <span class="skill-pill">Foreign Policy Analysis</span>
-        <span class="skill-pill">Security Studies</span>
-        <span class="skill-pill">International Political Economy</span>
-        <span class="skill-pill">Research Methods & Statistics</span>
-        <span class="skill-pill">Economics</span>
+        <span class="skill-pill">International Law</span><span class="skill-pill">EU Law</span><span class="skill-pill">Human Rights</span><span class="skill-pill">Migration</span><span class="skill-pill">Foreign Policy Analysis</span><span class="skill-pill">Security Studies</span><span class="skill-pill">International Political Economy</span><span class="skill-pill">Research Methods & Statistics</span><span class="skill-pill">Economics</span>
       </div>
     </div>
   </div>
@@ -498,162 +343,55 @@
   <!-- SKILLS -->
   <div class="section-label"><h2>Skills</h2></div>
   <div class="skills-grid">
-
     <div class="skill-group">
       <div class="skill-group-title">Research & Analysis</div>
-      <div class="skill-item">
-        <div class="skill-name">Foreign Policy Analysis <span>Expert</span></div>
-        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="95"></div></div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-name">Leadership Trait Analysis <span>Expert</span></div>
-        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="90"></div></div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-name">Discourse Analysis <span>Expert</span></div>
-        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="90"></div></div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-name">Qualitative Data Coding <span>Advanced</span></div>
-        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-name">Political Risk Analysis <span>Advanced</span></div>
-        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="82"></div></div>
-      </div>
+      <div class="skill-item"><div class="skill-name">Foreign Policy Analysis <span>Expert</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="95"></div></div></div>
+      <div class="skill-item"><div class="skill-name">Leadership Trait Analysis <span>Expert</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="90"></div></div></div>
+      <div class="skill-item"><div class="skill-name">Discourse Analysis <span>Expert</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="90"></div></div></div>
+      <div class="skill-item"><div class="skill-name">Qualitative Data Coding <span>Advanced</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div></div>
+      <div class="skill-item"><div class="skill-name">Political Risk Analysis <span>Advanced</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="82"></div></div></div>
     </div>
-
     <div class="skill-group">
       <div class="skill-group-title">Digital Tools & Data</div>
-      <div class="skill-item">
-        <div class="skill-name">AI-assisted Research <span>Advanced</span></div>
-        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-name">Excel / Google Sheets <span>Advanced</span></div>
-        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-name">Tableau <span>Intermediate</span></div>
-        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="70"></div></div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-name">SQL <span>Intermediate</span></div>
-        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="65"></div></div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-name">Python / R <span>Fundamentals</span></div>
-        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="50"></div></div>
-      </div>
+      <div class="skill-item"><div class="skill-name">AI-assisted Research <span>Advanced</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div></div>
+      <div class="skill-item"><div class="skill-name">Excel / Google Sheets <span>Advanced</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div></div>
+      <div class="skill-item"><div class="skill-name">Tableau <span>Intermediate</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="70"></div></div></div>
+      <div class="skill-item"><div class="skill-name">SQL <span>Intermediate</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="65"></div></div></div>
+      <div class="skill-item"><div class="skill-name">Python / R <span>Fundamentals</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="50"></div></div></div>
     </div>
-
     <div class="skill-group">
       <div class="skill-group-title">Communication & Leadership</div>
-      <div class="skill-item">
-        <div class="skill-name">Policy & Brief Writing <span>Expert</span></div>
-        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="92"></div></div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-name">Stakeholder Communication <span>Expert</span></div>
-        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-name">Project Management <span>Advanced</span></div>
-        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-name">Visual Communication <span>Advanced</span></div>
-        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="78"></div></div>
-      </div>
+      <div class="skill-item"><div class="skill-name">Policy & Brief Writing <span>Expert</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="92"></div></div></div>
+      <div class="skill-item"><div class="skill-name">Stakeholder Communication <span>Expert</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div></div>
+      <div class="skill-item"><div class="skill-name">Project Management <span>Advanced</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div></div>
+      <div class="skill-item"><div class="skill-name">Visual Communication <span>Advanced</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="78"></div></div></div>
     </div>
-
   </div>
 
   <!-- LANGUAGES -->
   <div class="section-label"><h2>Languages</h2></div>
   <div class="lang-grid" style="margin-bottom:4rem;">
-    <div class="lang-card">
-      <div class="lang-name">Turkish</div>
-      <div class="lang-level">Native</div>
-      <div class="lang-dots">
-        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
-      </div>
-    </div>
-    <div class="lang-card">
-      <div class="lang-name">English</div>
-      <div class="lang-level">C2 — Proficient</div>
-      <div class="lang-dots">
-        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
-      </div>
-    </div>
-    <div class="lang-card">
-      <div class="lang-name">Hungarian</div>
-      <div class="lang-level">B1 — Intermediate</div>
-      <div class="lang-dots">
-        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
-      </div>
-    </div>
-    <div class="lang-card">
-      <div class="lang-name">German</div>
-      <div class="lang-level">B1 — Intermediate</div>
-      <div class="lang-dots">
-        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
-      </div>
-    </div>
+    <div class="lang-card"><div class="lang-name">Turkish</div><div class="lang-level">Native</div><div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div></div>
+    <div class="lang-card"><div class="lang-name">English</div><div class="lang-level">C2 — Proficient</div><div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div></div>
+    <div class="lang-card"><div class="lang-name">Hungarian</div><div class="lang-level">B1 — Intermediate</div><div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+    <div class="lang-card"><div class="lang-name">German</div><div class="lang-level">B1 — Intermediate</div><div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
   </div>
 
-  <!-- WRITING & RESEARCH -->
+  <!-- WRITING -->
   <div class="section-label"><h2>Writing & Research</h2></div>
   <div class="writing-list">
-    <div class="writing-item">
-      <div class="writing-dot"></div>
-      <div>
-        <div class="writing-title">Personality, Power, Policy: A Leadership Trait Analysis Application to Erdoğan's S-400 Crisis Leadership</div>
-        <div class="writing-meta">Undergraduate Thesis · ELTE · 2025</div>
-      </div>
-    </div>
-    <div class="writing-item">
-      <div class="writing-dot"></div>
-      <div>
-        <div class="writing-title">The Geopolitics of Repression: Xinjiang, China's Belt and Road, and International Silence</div>
-        <div class="writing-meta">Conference Paper · Students' Letters Conference, ELTE · 2024</div>
-      </div>
-    </div>
-    <div class="writing-item">
-      <div class="writing-dot"></div>
-      <div>
-        <div class="writing-title">Analytical Commentary — Security Governance, Foreign Policy & Narrative Construction</div>
-        <div class="writing-meta">The Political Cup · Substack · Oct 2025 — Present · 300+ monthly readers</div>
-      </div>
-    </div>
+    <div class="writing-item"><div class="writing-dot"></div><div><div class="writing-title">Personality, Power, Policy: A Leadership Trait Analysis Application to Erdoğan's S-400 Crisis Leadership</div><div class="writing-meta">Undergraduate Thesis · ELTE · 2025</div></div></div>
+    <div class="writing-item"><div class="writing-dot"></div><div><div class="writing-title">The Geopolitics of Repression: Xinjiang, China's Belt and Road, and International Silence</div><div class="writing-meta">Conference Paper · Students' Letters Conference, ELTE · 2024</div></div></div>
+    <div class="writing-item"><div class="writing-dot"></div><div><div class="writing-title">Analytical Commentary — Security Governance, Foreign Policy & Narrative Construction</div><div class="writing-meta">ULTERIOR · Substack · Oct 2025 — Present · 300+ monthly readers</div></div></div>
   </div>
-
-</div><!-- /page -->
+</div>
 
 <script>
-  // Animate skill bars on page load with stagger
+  function toggleNav() { document.getElementById('navMobile').classList.toggle('open'); }
   window.addEventListener('load', () => {
-    const bars = document.querySelectorAll('.skill-bar-fill');
-    bars.forEach((bar, i) => {
-      setTimeout(() => {
-        bar.style.width = bar.dataset.width + '%';
-      }, 200 + i * 80);
+    document.querySelectorAll('.skill-bar-fill').forEach((bar, i) => {
+      setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 200 + i * 80);
     });
-  });
-</script>
-  
-<script>
-  function toggleNav() {
-    document.getElementById('navMobile').classList.toggle('open');
-  }
-
-  // Highlight active page in nav
-  const path = window.location.pathname;
-  document.querySelectorAll('.nav-links a, .nav-mobile a').forEach(link => {
-    if (link.getAttribute('href') === path ||
-        (path === '/' && link.getAttribute('href') === '/index.html')) {
-      link.classList.add('active');
-    }
   });
 </script>
 </body>
