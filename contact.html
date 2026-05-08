@@ -611,56 +611,107 @@
   <div class="right-panel">
 
     <div id="formWrap">
-      <div class="form-title">Send a message</div>
-      <div class="form-subtitle">Fill in the form and I'll get back to you as soon as possible.</div>
+  <div class="form-title">Send a message</div>
+  <div class="form-subtitle">Fill in the form and I'll get back to you as soon as possible.</div>
 
-      <div class="form">
+  <form
+    class="form"
+    id="contactForm"
+    action="https://formspree.io/f/maqvdzkk"
+    method="POST"
+    onsubmit="handleSubmit(event)"
+  >
 
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="fname">Name <span>*</span></label>
-            <input class="form-input" id="fname" type="text" placeholder="Your name">
-            <span class="form-error" id="fname-err">Please enter your name.</span>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="femail">Email <span>*</span></label>
-            <input class="form-input" id="femail" type="email" placeholder="your@email.com">
-            <span class="form-error" id="femail-err">Please enter a valid email.</span>
-          </div>
-        </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="fname">Name <span>*</span></label>
+        <input
+          class="form-input"
+          id="fname"
+          name="name"
+          type="text"
+          placeholder="Your name"
+        >
+        <span class="form-error" id="fname-err">Please enter your name.</span>
+      </div>
 
-        <div class="form-group">
-          <label class="form-label" for="fsubject">Subject <span>*</span></label>
-          <select class="form-select" id="fsubject">
-            <option value="">— Select a subject —</option>
-            <option value="job">Job or internship opportunity</option>
-            <option value="collab">Research collaboration</option>
-            <option value="writing">Writing commission</option>
-            <option value="speaking">Speaking or event</option>
-            <option value="press">Press or media</option>
-            <option value="other">Other</option>
-          </select>
-          <span class="form-error" id="fsubject-err">Please select a subject.</span>
-        </div>
+      <div class="form-group">
+        <label class="form-label" for="femail">Email <span>*</span></label>
+        <input
+          class="form-input"
+          id="femail"
+          name="email"
+          type="email"
+          placeholder="your@email.com"
+        >
+        <span class="form-error" id="femail-err">Please enter a valid email.</span>
+      </div>
+    </div>
 
-        <div class="form-group">
-          <label class="form-label" for="forg">Organisation <span style="color:var(--charcoal-light);font-weight:400">(optional)</span></label>
-          <input class="form-input" id="forg" type="text" placeholder="Where are you writing from?">
-        </div>
+    <div class="form-group">
+      <label class="form-label" for="fsubject">Subject <span>*</span></label>
 
-        <div class="form-group">
-          <label class="form-label" for="fmsg">Message <span>*</span></label>
-          <textarea class="form-textarea" id="fmsg" placeholder="What would you like to discuss?"></textarea>
-          <span class="form-error" id="fmsg-err">Please write a message.</span>
-        </div>
+      <select
+        class="form-select"
+        id="fsubject"
+        name="subject"
+      >
+        <option value="">— Select a subject —</option>
+        <option value="job">Job or internship opportunity</option>
+        <option value="collab">Research collaboration</option>
+        <option value="writing">Writing commission</option>
+        <option value="speaking">Speaking or event</option>
+        <option value="press">Press or media</option>
+        <option value="other">Other</option>
+      </select>
 
-        <div class="form-footer">
-          <span class="form-note">* Required fields</span>
-          <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">
-            Send message →
-          </button>
-        </div>
+      <span class="form-error" id="fsubject-err">Please select a subject.</span>
+    </div>
 
+    <div class="form-group">
+      <label class="form-label" for="forg">
+        Organisation
+        <span style="color:var(--charcoal-light);font-weight:400">(optional)</span>
+      </label>
+
+      <input
+        class="form-input"
+        id="forg"
+        name="organisation"
+        type="text"
+        placeholder="Where are you writing from?"
+      >
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="fmsg">Message <span>*</span></label>
+
+      <textarea
+        class="form-textarea"
+        id="fmsg"
+        name="message"
+        placeholder="What would you like to discuss?"
+      ></textarea>
+
+      <span class="form-error" id="fmsg-err">
+        Please write a message.
+      </span>
+    </div>
+
+    <div class="form-footer">
+      <span class="form-note">* Required fields</span>
+
+      <button
+        class="submit-btn"
+        id="submitBtn"
+        type="submit"
+      >
+        Send message →
+      </button>
+    </div>
+
+  </form>
+</div>
       </div>
     </div>
 
@@ -711,30 +762,41 @@
     return ok;
   }
 
-  function handleSubmit() {
-    if (!validate()) return;
+  async function handleSubmit(event) {
+  event.preventDefault();
 
-    const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.textContent = 'Sending…';
+  if (!validate()) return;
 
-    // Build mailto link as fallback (no backend needed)
-    const name    = document.getElementById('fname').value;
-    const email   = document.getElementById('femail').value;
-    const subject = document.getElementById('fsubject').value;
-    const org     = document.getElementById('forg').value;
-    const msg     = document.getElementById('fmsg').value;
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
 
-    const body = `Name: ${name}\nEmail: ${email}\nOrganisation: ${org || '—'}\n\n${msg}`;
-    const mailto = `mailto:kerzibansicim24@gmail.com?subject=${encodeURIComponent('Portfolio contact: ' + subject)}&body=${encodeURIComponent(body)}`;
+  const form = document.getElementById('contactForm');
 
-    // Open mailto then show success
-    setTimeout(() => {
-      window.location.href = mailto;
+  try {
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (response.ok) {
       document.getElementById('formWrap').style.display = 'none';
       document.getElementById('formSuccess').classList.add('visible');
-    }, 600);
+      form.reset();
+    } else {
+      alert('Something went wrong. Please try again.');
+    }
+
+  } catch (error) {
+    alert('Network error. Please try again.');
   }
+
+  btn.disabled = false;
+  btn.textContent = 'Send message →';
+}
 
   // Clear error on input
   ['fname','femail','fsubject','fmsg'].forEach(id => {
